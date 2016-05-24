@@ -1,4 +1,4 @@
-# Simulazione d’esame del 03/06/2015
+# Esercizio tratto dalla simulazione d’esame del 03/06/2015
 
 Si consideri il data-set messo a disposizione dal servizio di Bike Sharing dell’area di San Francisco (Bay Area).	 
 
