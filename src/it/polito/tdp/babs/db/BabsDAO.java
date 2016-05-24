@@ -103,6 +103,57 @@ public class BabsDAO {
 		return result ;
 	}
 	
+	
+	public int countTripStarted(Station s, LocalDate day) {
+		
+		String sql = "select count(*) FROM trip WHERE StartTerminal=? AND DATE(StartDate)=?" ;
+		
+		Connection conn = DBConnect.getConnection() ;
+		try {
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			
+			st.setInt(1, s.getStationID());
+			st.setDate(2, java.sql.Date.valueOf(day));
+			
+			ResultSet rs = st.executeQuery() ;
+			
+			rs.first() ;
+			
+			return rs.getInt(1) ;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw(new RuntimeException(e)) ;
+		}
+	}
+	
+	public int countTripEnded(Station s, LocalDate day) {
+		
+		String sql = "select count(*) FROM trip WHERE EndTerminal=? AND DATE(StartDate)=?" ;
+		
+		Connection conn = DBConnect.getConnection() ;
+		try {
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			
+			st.setInt(1, s.getStationID());
+			st.setDate(2, java.sql.Date.valueOf(day));
+			
+			ResultSet rs = st.executeQuery() ;
+			
+			rs.first() ;
+			
+			return rs.getInt(1) ;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw(new RuntimeException(e)) ;
+		}
+	}
+
+	
+	
 	public List<Trip> getTripsOfDay(LocalDate day) {
 		List<Trip> result = new LinkedList<Trip>() ;
 		
