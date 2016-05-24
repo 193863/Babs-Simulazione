@@ -3,12 +3,14 @@ package it.polito.tdp.babs;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.babs.model.Model;
 import it.polito.tdp.babs.model.Simula;
 import it.polito.tdp.babs.model.StationStats;
+import it.polito.tdp.babs.model.Trip;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -75,9 +77,12 @@ public class BabsController {
     	sim.run();
     	
     	// stampa:
-    	sim.getConsegneMancate();
-    	sim.getPreseMancate();
-    	
+    	txtResult.appendText(String.format("\nData: %s - Riempimento %.2f\n",
+    			day.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+    			K*100.0 )) ;
+
+    	txtResult.appendText(String.format("Consegne mancate: %d\n", sim.getConsegneMancate())) ;
+    	txtResult.appendText(String.format("Prese    mancate: %d\n", sim.getPreseMancate())) ;   	
     	
     }
 
@@ -87,5 +92,6 @@ public class BabsController {
         assert sliderK != null : "fx:id=\"sliderK\" was not injected: check your FXML file 'Babs.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Babs.fxml'.";
 
+        pickData.setValue(LocalDate.of(2013, 9, 1));
     }
 }

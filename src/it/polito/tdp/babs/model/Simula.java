@@ -2,6 +2,7 @@ package it.polito.tdp.babs.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -24,7 +25,7 @@ public class Simula {
 		PICK, DROP ;
 	}
 	
-	private class Event {
+	private class Event implements Comparable<Event> {
 		private EventType type ;
 		private LocalDateTime tempo ;
 		private Station station ;
@@ -98,6 +99,7 @@ public class Simula {
 			return Simula.this;
 		}
 		
+		@Override
 		public int compareTo(Event other) {
 			return this.tempo.compareTo(other.getTempo()) ;
 		}
@@ -112,6 +114,8 @@ public class Simula {
 		this.K = K ;
 		
 		this.model = model ;
+		
+		this.occupazione = new HashMap<Station, Integer>() ;
 		
 		for(Station s : model.getStations()) {
 			int bici = (int)(s.getDockCount() * K) ;

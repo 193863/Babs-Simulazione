@@ -47,6 +47,11 @@ public class Model {
 		}
 		return null ;
 	}
+
+	public List<Trip> getTripsByDate(LocalDate day) {
+		BabsDAO dao = new BabsDAO() ;
+		return dao.getTripsOfDay(day) ;
+	}
 	
 
 }
